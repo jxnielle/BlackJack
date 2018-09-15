@@ -71,7 +71,8 @@ public class Hand
 	 * Function  : getHandValue 
 	 * Purpose   : add card values in hand
 	 * Returns   : the total value of all cards currently in the hand 
-	 */			
+	 */	
+	public int getHandValue()
 	{
 		for (Card card : cards) 
 		{
