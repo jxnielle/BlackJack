@@ -1,9 +1,11 @@
 package core;
 
-import java.awt.List;
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
-import org.junit.validator.ValidateWith;
+import javax.swing.table.TableStringConverter;
 
 import junit.framework.TestCase;
 
@@ -15,6 +17,7 @@ public class BlackjackTest extends TestCase{
 		assertEquals(52, deck.getCards().size());
 		
 		Card drawedCard = deck.drawCard();
+		assertNotNull(drawedCard);
 		aHand.add(drawedCard);	
 		
 		assertFalse(deck.findCard(drawedCard));			
@@ -24,10 +27,10 @@ public class BlackjackTest extends TestCase{
 		Deck deck = new Deck();
 		Hand aHand = new Hand();
 		Card drawedCard = deck.drawCard();
-		
+
 		aHand.add(drawedCard);
 
-		assertTrue(aHand.findCard(drawedCard));		
+		assertTrue(aHand.getCards().contains(drawedCard));		
 	}
 	
 	public void testShuffle() {
@@ -37,5 +40,46 @@ public class BlackjackTest extends TestCase{
 		assertFalse(deck1.same(deck2));	
 		assertTrue(deck1.same(deck1));
 		
+	}
+	
+	public void testHandFromFile() {
+		try {
+			
+			String[] cards = readFile("test.txt");
+			assertTrue(cards.length > 4);
+
+			Hand dealerHand = new Hand();
+			Hand playerHand = new Hand();
+
+			playerHand.add(File.toCard(cards[0]));
+			playerHand.add(File.toCard(cards[1]));
+			
+			dealerHand.add(File.toCard(cards[2]));
+			dealerHand.add(File.toCard(cards[3]));
+			
+			
+			assertEquals(File.toCard(cards[0].getValue()), 10);
+			assertTrue(dealerHand.hasAce());
+			assertFalse(dealerHand.hasBlackjack());
+			assertFalse(dealerHand.isBust());
+			
+			assertTrue(playerHand.hasAce());
+			assertTrue(playerHand.hasBlackjack());
+									
+		} catch (IOException e) {
+			e.printStackTrace();
+		}			
+	}	
+	
+	private String[] readFile(String fileName) throws IOException {
+
+		BufferedReader br;
+		br = new BufferedReader(new FileReader(fileName));
+		String line;
+		line = br.readLine();
+		br.close();
+		
+		String[] moves = line.split(" ");
+		return moves;				
 	}
 }
