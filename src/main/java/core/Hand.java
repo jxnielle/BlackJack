@@ -13,8 +13,8 @@ public class Hand
 	 */			
 	public Hand() 
 	{
-		value = 0;
-		cards = new ArrayList<Card>();
+		this.value = 0;
+		this.cards = new ArrayList<Card>();
 	}
 	
 	/*
@@ -44,6 +44,12 @@ public class Hand
 	 */			
 	public boolean hasAce() 
 	{
+		for (Card card: this.cards) {
+			if (card.getRank().equals("A")) {
+				return true;
+			}
+		}
+		
 		return false;
 	}
 	
@@ -54,6 +60,10 @@ public class Hand
 	 */			
 	public boolean isBust() 
 	{
+		if (this.getHandValue() > 21) {
+			return true;
+		}
+		
 		return false;
 	}
 	
@@ -64,6 +74,10 @@ public class Hand
 	 */			
 	public boolean hasBlackjack() 
 	{
+		if (this.getHandValue() == 21) {
+			return true;
+		}
+		
 		return false;
 	}	
 	
