@@ -42,8 +42,8 @@ public class BlackjackTest extends TestCase{
 	public void testHandFromFile() {
 		try {
 			
-			String[] cards = readFile("test.txt");
-			assertTrue(cards.length > 4);
+			String[] cards = readFile("src/test/resources/core/testFiles/test.txt");
+			assertEquals(cards.length, 4);
 			FileConvert fileConvert = new FileConvert();
 			Hand dealerHand = new Hand();
 			Hand playerHand = new Hand();
@@ -53,11 +53,10 @@ public class BlackjackTest extends TestCase{
 			
 			dealerHand.add(fileConvert.toCard(cards[2]));
 			dealerHand.add(fileConvert.toCard(cards[3]));
-			
-			
+						
 			assertEquals(fileConvert.toCard(cards[0]).getValue(), 10);
 			assertTrue(dealerHand.hasAce());
-			assertFalse(dealerHand.hasBlackjack());
+			assertTrue(dealerHand.hasBlackjack());
 			assertFalse(dealerHand.isBust());
 			
 			assertTrue(playerHand.hasAce());
