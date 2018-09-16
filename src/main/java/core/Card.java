@@ -42,14 +42,12 @@ public class Card
 	 * Returns   : rank value
 	 */			
 	public int getValue() 
-	{
-		String rank = this.getRank();
-		
-		if (rank == "J" || rank == "Q" || rank == "K") 
+	{		
+		if (rank.equalsIgnoreCase("J") || rank.equalsIgnoreCase("Q") || rank.equalsIgnoreCase("K")) 
 		{
 			return 10;
 		}
-		else if (rank == "A") 
+		else if (rank.equalsIgnoreCase("A"))
 		{
 			return 11;
 		}

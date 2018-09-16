@@ -15,8 +15,8 @@ public class Deck
 	 */			
 	public Deck() 
 	{
-		cards = new ArrayList<Card>(52);
-		setDeck();
+		this.cards = new ArrayList<Card>(52);
+		this.setDeck();
 	}
 	
 	/*
@@ -54,7 +54,7 @@ public class Deck
 	 */		
 	public boolean findCard(Card aCard) 
 	{
-		for (Card card: cards) 
+		for (Card card: this.cards) 
 		{
 			if(card.getRank().equals(aCard.getRank()) && card.getSuit() == aCard.getSuit()) 
 			{
@@ -72,7 +72,7 @@ public class Deck
 	 */			
 	public Card drawCard() 
 	{
-		Card aCard = cards.remove(cards.size() - 1);
+		Card aCard = this.cards.remove(cards.size() - 1);
 		
 		return aCard;
 	}

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Hand 
 {
 	private ArrayList<Card> cards;
-	private int value;
 	
 	/*
 	 * Function  : Hand
@@ -13,7 +12,6 @@ public class Hand
 	 */			
 	public Hand() 
 	{
-		this.value = 0;
 		this.cards = new ArrayList<Card>();
 	}
 	
@@ -88,11 +86,13 @@ public class Hand
 	 */	
 	public int getHandValue()
 	{
+		int value = 0;
+		
 		for (Card card : cards) 
 		{
 			value = value + card.getValue();
 		}
 		
-		return this.value;
+		return value;
 	}
 }
