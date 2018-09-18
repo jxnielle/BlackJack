@@ -1,6 +1,10 @@
 package core;
 
-public class FileConvert {
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class FileConverter {
 
 	/*
 	 * Function  : toCard
@@ -14,10 +18,21 @@ public class FileConvert {
 		Card aCard = new Card(suit, rank);
 		Deck deck = new Deck();	 	
 		
-		if (deck.findCard(aCard)) {
+		if (deck.findCard(aCard) >= 0) {
 			return aCard;
 		}
 		
 		return null;
 	}
+	
+	public String[] splitLine(String fileName) throws IOException {
+		BufferedReader br;
+		br = new BufferedReader(new FileReader(fileName));
+		String line;
+		line = br.readLine();
+		br.close();
+		
+		String[] moves = line.split(" ");
+		return moves;				
+	}	
 }
