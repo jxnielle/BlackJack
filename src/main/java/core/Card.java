@@ -4,6 +4,7 @@ public class Card
 {
 	private char suit;
 	private String rank;
+	private boolean visible;
 	
 	/*
 	 * Function  : Card
@@ -14,6 +15,7 @@ public class Card
 	{
 		this.suit = suit;
 		this.rank = rank;
+		this.visible = true;
 	}	
 	
 	/*
@@ -37,6 +39,16 @@ public class Card
 	}
 		
 	/*
+	 * Function  : toString
+	 * Purpose   : 
+	 * Returns   : String representation of card
+	 */		
+	public String toString() 
+	{
+		return this.suit + this.rank;
+	}
+	
+	/*
 	 * Function  : getValue
 	 * Purpose   : get value of the rank
 	 * Returns   : rank value
@@ -59,6 +71,27 @@ public class Card
 		{
 			return 0;
 		}
+	}
+	
+	public void setVisibility(boolean visible) {
+		this.visible = visible;
+	}
+	
+	public boolean isVisible() {
+		return this.visible;
+	}
+	
+	/*
+	 * Function  : isAce
+	 * Purpose   : determines if card is an Ace
+	 * Returns   : true/false
+	 */	
+	public boolean isAce() {
+		if (rank.equalsIgnoreCase("A")) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	/*

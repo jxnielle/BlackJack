@@ -50,19 +50,21 @@ public class Deck
 	 * Function  : findCard
 	 * Parameter : a Card object
 	 * Purpose   : checks if a Card object exists in the deck
-	 * Returns   : true/false
+	 * Returns   : index of Card
 	 */		
-	public boolean findCard(Card aCard) 
+	public int findCard(Card aCard) 
 	{
-		for (Card card: this.cards) 
-		{
-			if(card.getRank().equals(aCard.getRank()) && card.getSuit() == aCard.getSuit()) 
+		if (aCard != null) {
+			for (Card card: this.cards) 
 			{
-				return true;
-			}
+				if(card.getRank().equals(aCard.getRank()) && card.getSuit() == aCard.getSuit()) 
+				{
+					return this.getCards().indexOf(card);
+				}
+			}		
 		}
-		
-		return false;
+	
+		return -1;
 	}
 	
 	/*
@@ -75,6 +77,22 @@ public class Deck
 		Card aCard = this.cards.remove(cards.size() - 1);
 		
 		return aCard;
+	}
+	
+	/*
+	 * Function  : drawCard
+	 * Purpose   : pulls a specific card from the deck
+	 * Returns   : true/false
+	 */			
+	public Card drawCard(Card aCard) 
+	{
+		int indexOfCard = this.findCard(aCard);
+		if (indexOfCard >= 0) {
+			Card toremove = this.cards.remove(indexOfCard);	
+			return toremove;
+		}
+		
+		return null;
 	}
 	
 	/*
