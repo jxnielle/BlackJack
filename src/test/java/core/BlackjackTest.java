@@ -1,5 +1,7 @@
 package core;
 
+import static org.junit.Assert.assertNotEquals;
+
 import java.io.IOException;
 
 import junit.framework.TestCase;
@@ -96,6 +98,23 @@ public class BlackjackTest extends TestCase
 		assertEquals(21, aHand2.getHandValue());		
 	}
 	
+	public void testFileInputSupport() throws IOException {
+		Blackjack blackjack = new Blackjack();
+		blackjack.setHandsFromFile("src/test/resources/core/testFiles/fileSupportTest.txt");
+		
+		Hand dealerHand = blackjack.getDealerHand();
+		Hand playerHand = blackjack.getPlayerHand();
+
+		assertTrue(dealerHand.hasAce());
+		assertFalse(dealerHand.hasBlackjack());
+		assertTrue(dealerHand.isBust());
+		
+		assertFalse(playerHand.hasAce());
+		assertFalse(playerHand.hasBlackjack());	
+		
+		assertEquals(playerHand, blackjack.getWinner());		
+	}
+	
 	public void testWinner() {
 		// -- Both player and dealer have blackjack --
 		Blackjack blackjack = new Blackjack();
@@ -112,7 +131,7 @@ public class BlackjackTest extends TestCase
 		assertTrue(blackjack.getPlayerHand().hasBlackjack());
 			
 		assertEquals(blackjack.getDealerHand(), blackjack.getWinner());
-		assertEquals(blackjack.getPlayerHand(), blackjack.getWinner());	
+		assertNotEquals(blackjack.getPlayerHand(), blackjack.getWinner());	
 		
 		// -- Player has blackjack and dealer does not --
 		Blackjack blackjack2 = new Blackjack();
@@ -125,7 +144,7 @@ public class BlackjackTest extends TestCase
 		assertEquals(21, blackjack2.getPlayerHand().getHandValue());
 		assertEquals(13, blackjack2.getDealerHand().getHandValue());	
 		
-		assertEquals(blackjack2.getDealerHand(), blackjack2.getWinner());
+		assertNotEquals(blackjack2.getDealerHand(), blackjack2.getWinner());
 		assertEquals(blackjack2.getPlayerHand(), blackjack2.getWinner());	
 		
 		// -- Player Bust -- 
@@ -144,8 +163,8 @@ public class BlackjackTest extends TestCase
 		assertFalse(blackjack3.getDealerHand().isBust());
 		assertEquals(13, blackjack3.getDealerHand().getHandValue());
 		
-		assertEquals(blackjack3.getDealerHand(), blackjack2.getWinner());
-		assertEquals(blackjack3.getPlayerHand(), blackjack2.getWinner());
+		assertEquals(blackjack3.getDealerHand(), blackjack3.getWinner());
+		assertNotEquals(blackjack3.getPlayerHand(), blackjack3.getWinner());
 
 		// -- Dealer Bust -- 
 		Blackjack blackjack4 = new Blackjack();
@@ -162,37 +181,9 @@ public class BlackjackTest extends TestCase
 		assertTrue(blackjack4.getDealerHand().isBust());
 		assertEquals(22, blackjack4.getDealerHand().getHandValue());
 		
-		assertEquals(blackjack4.getDealerHand(), blackjack2.getWinner());
-		assertEquals(blackjack4.getPlayerHand(), blackjack2.getWinner());
+		assertNotEquals(blackjack4.getDealerHand(), blackjack4.getWinner());
+		assertEquals(blackjack4.getPlayerHand(), blackjack4.getWinner());
 		
-	}
-	
-	public void testFromFile() {
-		try {
-			FileConverter fileConvert = new FileConverter();
-			String[] cards = fileConvert.splitLine("src/test/resources/core/testFiles/test.txt");
-			
-			assertEquals(cards.length, 4);
-			Hand dealerHand = new Hand();
-			Hand playerHand = new Hand();
-
-			playerHand.add(fileConvert.toCard(cards[0]));
-			playerHand.add(fileConvert.toCard(cards[1]));
-			
-			dealerHand.add(fileConvert.toCard(cards[2]));
-			dealerHand.add(fileConvert.toCard(cards[3]));
-						
-			assertEquals(fileConvert.toCard(cards[0]).getValue(), 10);
-			assertTrue(dealerHand.hasAce());
-			assertTrue(dealerHand.hasBlackjack());
-			assertFalse(dealerHand.isBust());
-			
-			assertTrue(playerHand.hasAce());
-			assertTrue(playerHand.hasBlackjack());
-									
-		} catch (IOException e) {
-			e.printStackTrace();
-		}			
 	}	
 }
 ;
