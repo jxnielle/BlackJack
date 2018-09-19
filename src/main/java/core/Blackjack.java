@@ -27,6 +27,10 @@ public class Blackjack {
 		return this.dealerHand;
 	}
 	
+	public Deck getDeck() {
+		return this.deck;
+	}
+	
 	public Hand getWinner() {
 		if (dealerHand.hasBlackjack() || playerHand.isBust() || 
 				(dealerHand.getHandValue() > playerHand.getHandValue() && !dealerHand.isBust()) || 
@@ -71,10 +75,19 @@ public class Blackjack {
 				}
 			}		
 		}	
-	}	
+	}
 	
-	public Deck getDeck() {
-		return this.deck;
+	public void addInitialCards() 
+	{	
+	    playerHand.add(deck.drawCard());
+	    playerHand.add(deck.drawCard());
+	    
+	    Card dealerCard1 = deck.drawCard();
+	    Card dealerCard2 = deck.drawCard();
+	    dealerCard2.setVisibility(false);
+	    
+	    dealerHand.add(dealerCard1);
+	    dealerHand.add(dealerCard2);
 	}
 }
 
