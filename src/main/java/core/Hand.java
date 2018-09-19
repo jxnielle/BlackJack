@@ -25,6 +25,20 @@ public class Hand
 		return this.cards;
 	}
 	
+	public Card getCard(Card aCard) {
+		if (aCard != null) {
+			for (Card card: this.cards) 
+			{
+				if(card.getRank().equals(aCard.getRank()) && card.getSuit() == aCard.getSuit()) 
+				{
+					return card;
+				}
+			}		
+		}
+		
+		return null;
+	}
+	
 	/*
 	 * Function  : add
 	 * Parameter : a Card object
@@ -87,10 +101,31 @@ public class Hand
 	public int getHandValue()
 	{
 		int value = 0;
+		int acesInHand = 0;
 		
 		for (Card card : cards) 
 		{
-			value = value + card.getValue();
+			if (card.isAce()) 
+			{
+				acesInHand++;
+			}
+			else
+			{
+				value = value + card.getValue();	
+			}			
+		}
+		
+		//Determine value of Ace
+		for (int i = 0; i < acesInHand; i++ ) 
+		{
+			if ((value + 11) > 21) 
+			{
+				value = value + 1;
+			}
+			else 
+			{
+				value = value + 11;
+			}			
 		}
 		
 		return value;
