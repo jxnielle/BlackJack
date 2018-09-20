@@ -25,6 +25,12 @@ public class Hand
 		return this.cards;
 	}
 	
+	/*
+	 * Function  : getCard
+	 * Parameter : the Card searching for in the hand 
+	 * Purpose   : returns card object if found in hand
+	 * Returns   : a Card 
+	 */	
 	public Card getCard(Card aCard) {
 		if (aCard != null) {
 			for (Card card: this.cards) 

@@ -25,6 +25,12 @@ public class FileConverter {
 		return null;
 	}
 	
+	/*
+	 * Function  : splitLine
+	 * Parameter : file name
+	 * Purpose   : split file line into array
+	 * Returns   : an Array
+	 */
 	public String[] splitLine(String fileName) throws IOException {
 		BufferedReader br;
 		br = new BufferedReader(new FileReader(fileName));

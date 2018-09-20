@@ -81,8 +81,9 @@ public class Deck
 	
 	/*
 	 * Function  : drawCard
+	 * Parameter : a Card
 	 * Purpose   : pulls a specific card from the deck
-	 * Returns   : true/false
+	 * Returns   : Card
 	 */			
 	public Card drawCard(Card aCard) 
 	{

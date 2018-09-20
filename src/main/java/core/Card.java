@@ -73,10 +73,21 @@ public class Card
 		}
 	}
 	
-	public void setVisibility(boolean visible) {
+	/*
+	 * Function  : setVisibility
+	 * Parameter : visible
+	 * Purpose   : sets the visibility of the card
+	 */		
+	public void setVisibility(boolean visible) 
+	{
 		this.visible = visible;
 	}
 	
+	/*
+	 * Function  : isVisible
+	 * Purpose   : returns visibility of card
+	 * Returns   : true/false
+	 */		
 	public boolean isVisible() {
 		return this.visible;
 	}
