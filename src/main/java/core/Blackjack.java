@@ -48,16 +48,20 @@ public class Blackjack {
 		FileConverter fileConvert = new FileConverter();	
 		String[] cards = fileConvert.splitLine(fileName);
 		
-		Card card1 = this.deck.drawCard(fileConvert.toCard(cards[0]));
-		Card card2 = this.deck.drawCard(fileConvert.toCard(cards[1]));
-		Card card3 = this.deck.drawCard(fileConvert.toCard(cards[2]));
-		Card card4 = this.deck.drawCard(fileConvert.toCard(cards[3]));	
-		
-		this.playerHand.add(card1);
-		this.playerHand.add(card2);		
-		this.dealerHand.add(card3);
-		this.dealerHand.add(card4);
-		
+		if (cards.length >= 4) {
+			Card card1 = this.deck.drawCard(fileConvert.toCard(cards[0]));
+			Card card2 = this.deck.drawCard(fileConvert.toCard(cards[1]));
+			Card card3 = this.deck.drawCard(fileConvert.toCard(cards[2]));
+			Card card4 = this.deck.drawCard(fileConvert.toCard(cards[3]));	
+			
+			if (card1 != null && card2 != null && card3 != null && card4 != null) {
+				this.playerHand.add(card1);
+				this.playerHand.add(card2);		
+				this.dealerHand.add(card3);
+				this.dealerHand.add(card4);		
+			}
+		}
+	
 		if (cards.length > 4) {
 			boolean isStand = false;
 			for (int i = 4; i < cards.length; i++) {
@@ -88,6 +92,15 @@ public class Blackjack {
 	    
 	    dealerHand.add(dealerCard1);
 	    dealerHand.add(dealerCard2);
+	}
+	
+	public void hitUntilStand() 
+	{		
+		while ((dealerHand.getHandValue() == 17 && dealerHand.hasAce()) 
+				|| dealerHand.getHandValue() <= 16) 
+		{
+			dealerHand.add(deck.drawCard());
+		}
 	}
 }
 
