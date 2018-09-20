@@ -107,12 +107,12 @@ public class BlackjackTest extends TestCase
 
 		assertTrue(dealerHand.hasAce());
 		assertFalse(dealerHand.hasBlackjack());
-		assertTrue(dealerHand.isBust());
+		assertFalse(dealerHand.isBust());
 		
-		assertFalse(playerHand.hasAce());
+		assertTrue(playerHand.hasAce());
 		assertFalse(playerHand.hasBlackjack());	
 		
-		assertEquals(playerHand, blackjack.getWinner());		
+		assertEquals(dealerHand, blackjack.getWinner());		
 	}
 	
 	public void testWinner() {
@@ -182,8 +182,7 @@ public class BlackjackTest extends TestCase
 		assertEquals(22, blackjack4.getDealerHand().getHandValue());
 		
 		assertNotEquals(blackjack4.getDealerHand(), blackjack4.getWinner());
-		assertEquals(blackjack4.getPlayerHand(), blackjack4.getWinner());
-		
+		assertEquals(blackjack4.getPlayerHand(), blackjack4.getWinner());		
 	}	
 }
 ;
